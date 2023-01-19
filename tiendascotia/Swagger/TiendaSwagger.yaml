@@ -1,0 +1,491 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/modificarUsuario/{id}": {
+      "put": {
+        "tags": [
+          "usuario-controlador"
+        ],
+        "operationId": "modificarUsuario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestResponseAgregar"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/modificarTarea/{id}": {
+      "put": {
+        "tags": [
+          "tarea-controller"
+        ],
+        "operationId": "modificarTarea",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestResponseAgregarTarea"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/agregarUsuario": {
+      "post": {
+        "tags": [
+          "usuario-controlador"
+        ],
+        "operationId": "AgregarUsuario",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestResponseAgregar"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/agregarTarea": {
+      "post": {
+        "tags": [
+          "tarea-controller"
+        ],
+        "operationId": "AgregarTarea",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestResponseAgregarTarea"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/listarUsuario": {
+      "get": {
+        "tags": [
+          "usuario-controlador"
+        ],
+        "operationId": "listarUsuario",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsuarioModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/listarTarea": {
+      "get": {
+        "tags": [
+          "tarea-controller"
+        ],
+        "operationId": "listartarea",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TareasModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/filtros": {
+      "get": {
+        "tags": [
+          "usuario-controlador"
+        ],
+        "operationId": "consultafiltros",
+        "parameters": [
+          {
+            "name": "request",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/FiltrosDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/filtrosTarea": {
+      "get": {
+        "tags": [
+          "tarea-controller"
+        ],
+        "operationId": "consultafiltrosTarea",
+        "parameters": [
+          {
+            "name": "request",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/FiltrosDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/consultarUsuario/{Cedula}": {
+      "get": {
+        "tags": [
+          "usuario-controlador"
+        ],
+        "operationId": "consultarUsuarioPorCedula",
+        "parameters": [
+          {
+            "name": "Cedula",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestResponseAgregar"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/consultarTarea/{id}": {
+      "get": {
+        "tags": [
+          "tarea-controller"
+        ],
+        "operationId": "consultarTareaPorid",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestResponseAgregarTarea"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/eliminarUsuario/{Cedula}": {
+      "delete": {
+        "tags": [
+          "usuario-controlador"
+        ],
+        "operationId": "deleteUsuario",
+        "parameters": [
+          {
+            "name": "Cedula",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/eliminarTarea/{id}": {
+      "delete": {
+        "tags": [
+          "tarea-controller"
+        ],
+        "operationId": "deleteTarea",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RequestResponseAgregar": {
+        "type": "object",
+        "properties": {
+          "cedula_Usuario": {
+            "type": "string"
+          },
+          "nombre_Usuario": {
+            "type": "string"
+          },
+          "correo_Usuario": {
+            "type": "string"
+          },
+          "usuario": {
+            "type": "string"
+          },
+          "clave_Usuario": {
+            "type": "string"
+          },
+          "fecha_Ingreso": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "RequestResponseAgregarTarea": {
+        "type": "object",
+        "properties": {
+          "id_Tarea": {
+            "type": "string"
+          },
+          "nombre_Tarea": {
+            "type": "string"
+          },
+          "mes_Entrega": {
+            "type": "string"
+          }
+        }
+      },
+      "UsuarioModel": {
+        "type": "object",
+        "properties": {
+          "cedula_Usuario": {
+            "type": "string"
+          },
+          "nombre_Usuario": {
+            "type": "string"
+          },
+          "correo_Usuario": {
+            "type": "string"
+          },
+          "usuario": {
+            "type": "string"
+          },
+          "clave_Usuario": {
+            "type": "string"
+          },
+          "fecha_Ingreso": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "TareasModel": {
+        "type": "object",
+        "properties": {
+          "id_Tarea": {
+            "type": "string"
+          },
+          "nombre_Tarea": {
+            "type": "string"
+          },
+          "mes_Entrega": {
+            "type": "string"
+          }
+        }
+      },
+      "FiltroDetalle": {
+        "type": "object",
+        "properties": {
+          "parametro": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "string"
+          }
+        }
+      },
+      "FiltrosDto": {
+        "type": "object",
+        "properties": {
+          "filtros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FiltroDetalle"
+            }
+          }
+        }
+      },
+      "ResponseMessage": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
