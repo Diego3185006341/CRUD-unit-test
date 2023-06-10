@@ -50,11 +50,9 @@ public class UsuarioServiceimp implements IUsuarioService {
 	public ResponseEntity<List<UsuarioModel>> listarUsuarios() {
 		
 		try {
-			List<UsuarioModel>usuario=new ArrayList<UsuarioModel>();
-			
-			usuarioR.findAll().forEach(usuario ::add);
-			return new ResponseEntity<>(usuario,HttpStatus.OK); 
-			
+			List<UsuarioModel> usuarios = usuarioR.findAll();
+
+			return new ResponseEntity<>(usuarios, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
