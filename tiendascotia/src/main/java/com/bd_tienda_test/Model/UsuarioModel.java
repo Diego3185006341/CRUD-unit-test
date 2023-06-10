@@ -38,6 +38,6 @@ public class UsuarioModel {
 	public String clave_Usuario;
 	@Column(name="fecha_ingreso") 
 	public LocalDate fecha_Ingreso;
-	
+
 	
 }

@@ -41,6 +41,11 @@ public class UsuarioControlador {
 	{
 		return serviceUsuario.listarUsuarios();
 	}
+	@GetMapping("/listarUsuarioMapper")
+	public List<UsuarioModel> listarUsuarioMapper()
+	{
+		return serviceUsuario.listarUsuariosMapper();
+	}
 	
 		
 	/*@PostMapping("/saveUsuario")

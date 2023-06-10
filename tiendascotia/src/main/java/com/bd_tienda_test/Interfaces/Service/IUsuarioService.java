@@ -15,8 +15,8 @@ import com.bd_tienda_test.dto.ResponseMessage;
 public interface IUsuarioService {
 
 
-	public ResponseEntity<List<UsuarioModel>> listarUsuarios();
-
+	public ResponseEntity<List<UsuarioModel>>listarUsuarios();
+	public List<UsuarioModel>listarUsuariosMapper();
 	
 	//public ResponseEntity<ResponseUsuario> deleteUsuario (RequestResponseAgregar request);
 	public ResponseEntity<ResponseMessage> deleteUsuario (String Cedula);
