@@ -2,9 +2,7 @@ package com.bd_tienda_test.Service.imp;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
 import com.bd_tienda_test.Interfaces.Service.IUsuarioService;
 import com.bd_tienda_test.Model.UsuarioModel;
 import com.bd_tienda_test.Repository.UsuarioRepository;
-import com.bd_tienda_test.dto.FiltroDetalle;
 
 import com.bd_tienda_test.dto.FiltrosDto;
 import com.bd_tienda_test.dto.RequestResponseAgregar;
@@ -33,6 +30,7 @@ public class UsuarioServiceimp implements IUsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioR;
+
 
 
     @Override
@@ -84,29 +82,30 @@ public class UsuarioServiceimp implements IUsuarioService {
     }
 
 
-    @Override
-    public ResponseEntity<Object> agregarUsuario(RequestResponseAgregar request) {
-        try {
-            Optional<UsuarioModel> u = usuarioR.findById(request.getCedula_Usuario());
 
-            if (u.isPresent()) {
+	@Override
+	public ResponseEntity<Object> agregarUsuario(RequestResponseAgregar request) {
+		try {
+			Optional<UsuarioModel>u=usuarioR.findById(request.getCedula_Usuario());
 
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			if(u.isPresent()) {
 
-            } else {
-                usuarioR.save(UsuarioModel.builder().cedula_Usuario(request.getCedula_Usuario()).nombre_Usuario(request.getNombre_Usuario())
-                        .correo_Usuario(request.getCorreo_Usuario()).usuario(request.getUsuario()).clave_Usuario(request.getClave_Usuario()).
-                        fecha_Ingreso((LocalDate.now())).build());
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
-                return new ResponseEntity<>(request, HttpStatus.CREATED);
+			}else {
+			usuarioR.save(UsuarioModel.builder().cedula_Usuario(request.getCedula_Usuario()).nombre_Usuario(request.getNombre_Usuario())
+					.correo_Usuario(request.getCorreo_Usuario()).usuario(request.getUsuario()).clave_Usuario(request.getClave_Usuario()).
+					fecha_Ingreso((LocalDate.now())).build());
+
+			return new ResponseEntity<>(request,HttpStatus.CREATED);
 
 
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 
-    }
+	}
 
     @Override
     public ResponseEntity<Object> modificarUsuario(String id, RequestResponseAgregar request) {
@@ -182,48 +181,22 @@ public class UsuarioServiceimp implements IUsuarioService {
 
 
     @Override
-    public ResponseEntity<Object> consultafiltros(FiltrosDto request) {
+    public Optional<List<UsuarioModel>> consultafiltros(FiltrosDto request) {
         try {
+            Optional<List<UsuarioModel>>consultaData = usuarioR.consultaUsuariosFiltros(
+                    request.getFiltros().getFecha_Ingreso(),request.getFiltros().getFecha_salida(),
+                    request.getFiltros().getNombre_Usuario());
 
-            String fecha_ingreso = null;
-            String correo_usuario = null;
-            if (request.getFiltros() == null || request.getFiltros().isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
-            } else {
-                Map<String, String> obtenerFiltros = filtrosUsuario(request.getFiltros());
-
-                fecha_ingreso = obtenerFiltros.get("fecha_ingreso") != null ? (obtenerFiltros.get("fecha_ingreso"))
-                        : null;
-                //correo_usuario = obtenerFiltros.get("correo_usuario")!= null?(obtenerFiltros.get("correo_usuario"))
-                //: null; ;
-            }
-
-            List<UsuarioModel> consultaData = usuarioR.consultaUsuarios(fecha_ingreso);
-
-            List<RequestResponseAgregar> respuesta = new ArrayList<>();
-            consultaData.forEach(value -> respuesta.add(RequestResponseAgregar.builder().cedula_Usuario(value.getCedula_Usuario())
-                    .nombre_Usuario(value.getNombre_Usuario()).correo_Usuario(value.getCorreo_Usuario())
-                    .usuario(value.getUsuario()).clave_Usuario(value.getClave_Usuario()).fecha_Ingreso(value.fecha_Ingreso).build()));
-
-
-            return ResponseEntity.ok(respuesta);
+            return consultaData;
 
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            System.out.println("Exception occurred: " + e.getMessage());
         }
 
+        return null;
     }
 
-    private Map<String, String> filtrosUsuario(List<FiltroDetalle> filtros) {
-        Map<String, String> returnFiltros = new HashMap<>();
 
-        for (FiltroDetalle filtro : filtros) {
-            returnFiltros.put(filtro.getParametro(), filtro.getValor());
-        }
-
-        return returnFiltros;
-    }
 
 
 }

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bd_tienda_test.Interfaces.Service.IUsuarioService;
 import com.bd_tienda_test.Model.UsuarioModel;
 import com.bd_tienda_test.dto.FiltrosDto;
-import com.bd_tienda_test.dto.RequestConsultar;
 import com.bd_tienda_test.dto.RequestResponseAgregar;
 import com.bd_tienda_test.dto.ResponseMessage;
 
@@ -33,9 +32,7 @@ public class UsuarioControlador {
 	@Autowired
 	private IUsuarioService serviceUsuario;
 
-	
 
-	
 	@GetMapping("/listarUsuario")
 	public ResponseEntity<List<UsuarioModel>> listarUsuario()
 	{
@@ -106,7 +103,7 @@ public class UsuarioControlador {
 	}
 	
 	@GetMapping("/filtros")
-	public  ResponseEntity<Object> consultafiltros (@RequestBody FiltrosDto request ) {
+	public  Optional<List<UsuarioModel>> consultafiltros (@RequestBody FiltrosDto request ) {
 		return serviceUsuario.consultafiltros(request);
 		
 	}
