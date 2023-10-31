@@ -45,38 +45,7 @@ public class UsuarioControlador {
 	}
 	
 		
-	/*@PostMapping("/saveUsuario")
-	public boolean saveUsuario (@RequestBody UsuarioModel u) {
-		serviceUsuario.saveUsuario(u);
-		return true;
-	}*/	
-	
-	//@GetMapping("/newUsuario")
-	//public String agregarUsuario (Model model) {
-	//	model.addAttribute("usuario", new UsuarioModel());
-	//	return "formUsuarios.html";
-	//}
-	
 
-	
-	/*@PutMapping("/updateUsuario/{Cedula}")
-	public boolean actualizarUsuarioPorCedula(@PathVariable String Cedula, UsuarioModel u) {
-		Optional<UsuarioModel>usuario=serviceUsuario.listarIdUsuario(Cedula);
-		if(usuario.isPresent()) {
-			serviceUsuario.update(u);
-		return true;
-		}else {
-			return false;
-		}
-	}
-	*/
-	
-	/*@DeleteMapping ("eliminarUsuario/{Cedula}")
-	public ResponseEntity<ResponseUsuario> deleteUsuario (@RequestBody RequestResponseAgregar request)
-	{
-		return serviceUsuario.deleteUsuario(request);
-		
-	}*/
 	@DeleteMapping ("eliminarUsuario/{Cedula}")
 	public ResponseEntity<ResponseMessage> deleteUsuario (@PathVariable String Cedula)
 	{
